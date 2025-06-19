@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Farmacia Don Joche</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-image: url('https://thumbs.dreamstime.com/b/shampoos-personal-care-products-store-inside-33571861.jpg');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      color: #fff;
+    }
+
+    header {
+      text-align: center;
+      padding: 20px;
+      background: rgba(0, 80, 100, 0.7);
+    }
+
+    .logo {
+      width: 60px;
+      height: 60px;
+      margin: 0 auto 10px;
+      position: relative;
+    }
+
+    .logo::before,
+    .logo::after {
+      content: "";
+      position: absolute;
+      background-color: #0074cc;
+    }
+
+    .logo::before {
+      width: 20px;
+      height: 60px;
+      left: 20px;
+      top: 0;
+    }
+
+    .logo::after {
+      width: 60px;
+      height: 20px;
+      left: 0;
+      top: 20px;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin: 10px 0 5px;
+    }
+
+    h2 {
+      font-size: 1.2rem;
+      margin-top: 0;
+    }
+
+    .dynamic-box {
+      background-color: rgba(0, 0, 0, 0.6);
+      margin: 20px auto;
+      padding: 20px;
+      width: 80%;
+      border-radius: 10px;
+      font-size: 1.5rem;
+      text-align: center;
+      font-weight: bold;
+    }
+
+    .info-links {
+      display: flex;
+      justify-content: space-around;
+      background-color: rgba(0, 80, 100, 0.7);
+      padding: 15px;
+      margin: 10px 0;
+      flex-wrap: wrap;
+    }
+
+    .info-links a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      margin: 10px;
+    }
+
+    .menu-button {
+      position: fixed;
+      bottom: 120px;
+      left: 30px;
+      background-color: #004080;
+      border: none;
+      border-radius: 12px;
+      padding: 10px 15px;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .menu-icon {
+      display: inline-block;
+      width: 20px;
+      height: 14px;
+      position: relative;
+    }
+
+    .menu-icon span {
+      background-color: white;
+      height: 3px;
+      width: 100%;
+      position: absolute;
+      left: 0;
+      transition: 0.3s;
+    }
+
+    .menu-icon span:nth-child(1) { top: 0; }
+    .menu-icon span:nth-child(2) { top: 5px; }
+    .menu-icon span:nth-child(3) { top: 10px; }
+
+    .dropdown-menu {
+      position: fixed;
+      bottom: 190px;
+      left: 30px;
+      background-color: rgba(0, 0, 0, 0.8);
+      border-radius: 10px;
+      padding: 10px;
+      display: none;
+      flex-direction: column;
+      animation: slideDown 0.3s ease forwards;
+    }
+
+    @keyframes slideDown {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .dropdown-menu a {
+      color: white;
+      padding: 5px 10px;
+      text-decoration: none;
+      border-bottom: 1px solid #ccc;
+    }
+
+    .dropdown-menu a:last-child {
+      border-bottom: none;
+    }
+
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo"></div>
+    <h1>Farmacia Don Joche</h1>
+    <h2>Tu salud es nuestra prioridad</h2>
+  </header>
+
+  <div class="dynamic-box" id="dynamicText">Bienvenido</div>
+
+  <div class="info-links">
+    <a href="https://www.salud.gob.hn" target="_blank">Secretaría de Salud</a>
+    <a href="https://www.paho.org/es/honduras" target="_blank">OPS Honduras</a>
+    <a href="https://hospitalescuela.hn" target="_blank">Hospital Escuela de Honduras</a>
+  </div>
+
+  <button class="menu-button" onclick="toggleMenu()">
+    <div class="menu-icon">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    Menú
+  </button>
+
+  <div class="dropdown-menu" id="dropdownMenu">
+    <a href="index.html">Principal</a>
+    <a href="bebes.html">Bebés</a>
+    <a href="adultomayor.html">Adulto Mayor</a>
+    <a href="cuidadopersonal.html">Cuidado Personal</a>
+    <a href="suplementos.html">Suplementos</a>
+    <a href="belleza.html">Belleza</a>
+    <a href="ventalibre.html">Venta Libre</a>
+    <a href="dermocosmetica.html">Dermocosmética</a>
+    <a href="solicitudempleo.html">Solicitud de Empleo</a>
+  </div>
+
+  <script>
+    const messages = [
+      "Bienvenido",
+      "Recuerda: tu salud es primero",
+      "¡Visítanos!",
+      "Te esperamos"
+    ];
+    const colors = ["#00f2ff", "#90ffdc", "#a0d8ff", "#9cffc4"];
+    let i = 0;
+
+    setInterval(() => {
+      const el = document.getElementById("dynamicText");
+      el.textContent = messages[i % messages.length];
+      el.style.color = colors[i % colors.length];
+      i++;
+    }, 2500);
+
+    function toggleMenu() {
+      const menu = document.getElementById("dropdownMenu");
+      menu.style.display = menu.style.display === "flex" ? "none" : "flex";
+    }
+  </script>
+
+<!-- Formulario Profesional -->
+<section id="formulario-whatsapp" style="display: flex; justify-content: center; align-items: center; padding: 40px;">
+  <div style="background: #fff; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); padding: 30px 40px; width: 100%; max-width: 700px; font-family: 'Segoe UI', sans-serif; color: #111;">
+    <h2 style="text-align: center; margin-bottom: 20px;">Formulario de Solicitud</h2>
+    <form id="whatsappForm" style="display: flex; flex-direction: column; gap: 15px; color: #111;">
+
+      <label>Nombre completo:
+        <input type="text" id="nombre" required style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #ccc; color: #111;">
+      </label>
+
+      <label>Dirección:
+        <input type="text" id="direccion" required style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #ccc; color: #111;">
+      </label>
+
+      <label>Edad:
+        <input type="number" id="edad" required style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #ccc; color: #111;">
+      </label>
+
+      <label>¿Tienes experiencia?
+        <select id="experiencia" required style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #ccc; color: #111;">
+          <option value="">Seleccione una opción</option>
+          <option value="Sí">Sí</option>
+          <option value="No">No</option>
+        </select>
+      </label>
+
+      <label>¿Cuáles crees que son tus virtudes?
+        <textarea id="virtudes" rows="2" required style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #ccc; color: #111;"></textarea>
+      </label>
+
+      <label>¿Por qué deberíamos contratarte?
+        <textarea id="porque" rows="2" required style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #ccc; color: #111;"></textarea>
+      </label>
+
+      <label>¿Cuál ha sido tu mayor logro hasta ahora?
+        <textarea id="logro" rows="2" required style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #ccc; color: #111;"></textarea>
+      </label>
+
+      <label>¿Qué esperas de este trabajo?
+        <textarea id="expectativa" rows="2" required style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #ccc; color: #111;"></textarea>
+      </label>
+
+      <button type="submit" style="padding: 12px; border: none; background: #007bff; color: white; border-radius: 8px; font-size: 16px; cursor: pointer;">
+        Enviar a WhatsApp
+      </button>
+    </form>
+  </div>
+</section>
+
+<!-- JavaScript -->
+<script>
+  document.getElementById("whatsappForm").addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    const nombre = document.getElementById("nombre").value;
+    const direccion = document.getElementById("direccion").value;
+    const edad = document.getElementById("edad").value;
+    const experiencia = document.getElementById("experiencia").value;
+    const virtudes = document.getElementById("virtudes").value;
+    const porque = document.getElementById("porque").value;
+    const logro = document.getElementById("logro").value;
+    const expectativa = document.getElementById("expectativa").value;
+
+    const mensaje = `Nuevo formulario recibido:%0A
+Nombre: ${nombre}%0A
+Dirección: ${direccion}%0A
+Edad: ${edad}%0A
+Experiencia: ${experiencia}%0A
+Virtudes: ${virtudes}%0A
+Por qué contratarte: ${porque}%0A
+Mayor logro: ${logro}%0A
+Expectativas: ${expectativa}`;
+
+    const telefono = "50495734668";
+    const url = `https://api.whatsapp.com/send?phone=${telefono}&text=${mensaje}`;
+    window.open(url, '_blank');
+  });
+</script>
+
+
+</body>
+</html>
